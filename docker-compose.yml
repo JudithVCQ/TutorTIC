@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: tutortic-db
+    restart: always
+    environment:
+      POSTGRES_USER: tutortic_user
+      POSTGRES_PASSWORD: tutortic_password
+      POSTGRES_DB: tutortic_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      - ALLOWED_ORIGIN=http://localhost:8080
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=tutortic_db
+      - DB_USER=tutortic_user
+      - DB_PASS=tutortic_password
+    depends_on:
+      - db
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: always
+
+volumes:
+  pgdata:
+
