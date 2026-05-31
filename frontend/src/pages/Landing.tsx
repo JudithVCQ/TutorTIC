@@ -37,9 +37,115 @@ export default function Landing() {
             </div>
           </div>
 
-          {/* Right Mockup */}
-          <div style={{ flex: 1.2, display: 'flex', justifyContent: 'center', position: 'relative' }}>
-            <img src="/hero_mockup.png" alt="TutorTIC App Mockup" style={{ width: '130%', maxWidth: '800px', transform: 'translateX(10%)', filter: 'drop-shadow(0 30px 40px rgba(0,0,0,0.4))' }} />
+          {/* Right Interactive Dashboard Mockup */}
+          <div style={{ flex: 1.2, display: 'flex', flexDirection: 'column', gap: '16px', position: 'relative', minHeight: '420px', justifyContent: 'center' }}>
+            {/* Card 1: Employability Index */}
+            <div className="landing-card" style={{
+              background: 'rgba(255, 255, 255, 0.08)',
+              backdropFilter: 'blur(16px)',
+              border: '1px solid rgba(255, 255, 255, 0.15)',
+              borderRadius: '20px',
+              padding: '24px',
+              color: 'white',
+              boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
+              width: '320px',
+              alignSelf: 'flex-start',
+              transform: 'rotate(-2deg)',
+              transition: 'transform 0.3s ease'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#A6EAD7', letterSpacing: '0.5px' }}>REPORTES</span>
+                <span style={{ background: 'rgba(166, 234, 215, 0.2)', color: '#A6EAD7', padding: '3px 8px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700 }}>ACTIVO</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                <div style={{ position: 'relative', width: '70px', height: '70px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg width="70" height="70" viewBox="0 0 36 36">
+                    <path
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                      fill="none"
+                      stroke="rgba(255,255,255,0.1)"
+                      strokeWidth="3.5"
+                    />
+                    <path
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                      fill="none"
+                      stroke="#A6EAD7"
+                      strokeWidth="3.5"
+                      strokeDasharray="84, 100"
+                    />
+                  </svg>
+                  <span style={{ position: 'absolute', fontSize: '1.1rem', fontWeight: 800 }}>84%</span>
+                </div>
+                <div>
+                  <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', fontWeight: 700 }}>Índice de Empleabilidad</h4>
+                  <p style={{ margin: 0, fontSize: '0.8rem', opacity: 0.8 }}>¡Felicidades! Superas el promedio regional Ssr.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: Upcoming Session */}
+            <div className="landing-card" style={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(16px)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              borderRadius: '20px',
+              padding: '20px',
+              color: 'white',
+              boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
+              width: '300px',
+              alignSelf: 'center',
+              zIndex: 2,
+              transform: 'translateY(-10px) translateX(20px) rotate(1deg)',
+              transition: 'transform 0.3s ease'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#E8D59E', color: '#0F2C23', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>RC</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: '0.75rem', opacity: 0.7 }}>PRÓXIMA SESIÓN</div>
+                  <div style={{ fontSize: '0.95rem', fontWeight: 700 }}>Ricardo Chávez</div>
+                  <div style={{ fontSize: '0.8rem', color: '#A6EAD7', fontWeight: 500 }}>Hoy 18:30 (15 min)</div>
+                </div>
+                <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#10B981' }}></div>
+              </div>
+            </div>
+
+            {/* Card 3: Skills Level */}
+            <div className="landing-card" style={{
+              background: 'rgba(255, 255, 255, 0.08)',
+              backdropFilter: 'blur(16px)',
+              border: '1px solid rgba(255, 255, 255, 0.15)',
+              borderRadius: '20px',
+              padding: '20px',
+              color: 'white',
+              boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
+              width: '280px',
+              alignSelf: 'flex-start',
+              marginLeft: '40px',
+              transform: 'rotate(-1deg)',
+              transition: 'transform 0.3s ease'
+            }}>
+              <h4 style={{ margin: '0 0 12px 0', fontSize: '0.9rem', fontWeight: 700, color: '#A6EAD7' }}>Competencias Destacadas</h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ fontSize: '0.8rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                    <span>Cloud / DevOps</span>
+                    <span>90%</span>
+                  </div>
+                  <div style={{ height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', overflow: 'hidden' }}>
+                    <div style={{ width: '90%', height: '100%', background: '#A6EAD7' }}></div>
+                  </div>
+                </div>
+                <div style={{ fontSize: '0.8rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                    <span>Desarrollo Fullstack</span>
+                    <span>80%</span>
+                  </div>
+                  <div style={{ height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', overflow: 'hidden' }}>
+                    <div style={{ width: '80%', height: '100%', background: '#A6EAD7' }}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>
