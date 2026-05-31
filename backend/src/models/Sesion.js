@@ -9,7 +9,7 @@ const Sesion = sequelize.define('Sesion', {
     autoIncrement: true,
     allowNull: false
   },
-  // Llaves foráneas que referencian a Estudiante y Mentor
+  // Llaves foráneas que referencian a estudiantes y mentores (tabla intermedia M:N)
   estudianteId: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -25,6 +25,11 @@ const Sesion = sequelize.define('Sesion', {
       model: 'mentores',
       key: 'id'
     }
+  },
+  // Objetivo de la sesión
+  objetivo: {
+    type: DataTypes.TEXT,
+    allowNull: true
   },
   // Fecha de la sesión de mentoría
   fecha: {

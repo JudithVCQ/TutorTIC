@@ -9,10 +9,25 @@ const app = express();
 app.use(helmet());
 
 // 2. CORS configuration
-const allowedOrigin = process.env.ALLOWED_ORIGIN || 'http://localhost:8080';
+// Soporta múltiples orígenes: frontend estático (file://, localhost) y origen configurable
+const allowedOrigins = [
+  process.env.ALLOWED_ORIGIN || 'http://localhost:8080',
+  'http://localhost:3000',
+  'http://localhost:5173',   // Vite Dev Server
+  'http://127.0.0.1:5500',  // Live Server de VS Code
+  'http://localhost:5500'    // Live Server alternativo
+];
+
 app.use(cors({
-  origin: allowedOrigin,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: (origin, callback) => {
+    // Permitir peticiones sin origin (ej: curl, Postman, o archivos locales file://)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error(`CORS policy: Origin ${origin} not allowed.`), false);
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
@@ -27,11 +42,38 @@ const limiter = rateLimit({
 });
 app.use('/api/', limiter);
 
+// Rate Limiting más estricto para rutas de autenticación (anti brute-force)
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10, // Máximo 10 intentos de login por ventana
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Demasiados intentos de autenticación. Por favor espere 15 minutos.' }
+});
+
 // 4. Payload limit protection
 app.use(express.json({ limit: '10kb' })); // Limit body sizes to 10kb
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
-// 5. Basic API endpoints
+// Importación de rutas
+const authRoutes = require('./routes/authRoutes');
+const sesionesRoutes = require('./routes/sesionesRoutes');
+const mentoresRoutes = require('./routes/mentoresRoutes');
+const perfilRoutes = require('./routes/perfilRoutes');
+const evaluacionesRoutes = require('./routes/evaluacionesRoutes');
+const compromisosRoutes = require('./routes/compromisosRoutes');
+const vacantesRoutes = require('./routes/vacantesRoutes');
+
+// Montaje de rutas
+app.use('/api/auth', authLimiter, authRoutes);
+app.use('/api/sesiones', sesionesRoutes);
+app.use('/api/mentores', mentoresRoutes);
+app.use('/api/perfil', perfilRoutes);
+app.use('/api/evaluaciones', evaluacionesRoutes);
+app.use('/api/compromisos', compromisosRoutes);
+app.use('/api/vacantes', vacantesRoutes);
+
+// 6. Health check endpoint
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     status: 'OK',
@@ -40,12 +82,12 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// 6. 404 Route handler
+// 7. 404 Route handler
 app.use((req, res) => {
   res.status(404).json({ error: 'Recurso no encontrado' });
 });
 
-// 7. Secure global error handler (avoid leaking stack traces in production)
+// 8. Secure global error handler (avoid leaking stack traces in production)
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   console.error(err.stack);
