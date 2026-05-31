@@ -9,6 +9,8 @@ build/
 out/
 .next/
 .nuxt/
+.vite/
+
 
 # Environment files and secrets
 .env
