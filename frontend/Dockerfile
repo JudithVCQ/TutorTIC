@@ -1,19 +1,21 @@
-FROM nginx:1.25-alpine
+# Fase 1: Build de la app React/Vite
+FROM node:20-alpine as build
+WORKDIR /app
 
-# Remove default configuration
-RUN rm /etc/nginx/conf.d/default.conf
+COPY package*.json ./
+RUN npm install
 
-# Copy custom secure Nginx configuration
+COPY . .
+RUN npm run build
+
+# Fase 2: Servir con NGINX
+FROM nginx:alpine
+
+# Copiar build de Vite a la carpeta pública de Nginx
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Sobrescribir configuración de Nginx (para SPA routing)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy static assets to Nginx default html directory
-COPY . /usr/share/nginx/html
-
-# Adjust permissions to ensure nginx user can read the files
-RUN chmod -R 755 /usr/share/nginx/html
-
-# Expose port 80
 EXPOSE 80
-
-# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]

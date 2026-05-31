@@ -1,132 +1,14 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TutorTIC - Dashboard Arquitectura Cliente/Servidor</title>
-  
-  <!-- Modern Typography -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-  
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-
-  <!-- Premium Header -->
-  <header class="app-header">
-    <div class="container header-content">
-      <div class="logo">
-        <span class="logo-accent">Tutor</span>TIC
-      </div>
-      <div class="badge security-badge">
-        <span class="dot pulse"></span> DevSecOps Secure Environment
-      </div>
-    </div>
-  </header>
-
-  <!-- Main Content -->
-  <main class="app-main container">
-    
-    <!-- Hero / Welcome Section -->
-    <section class="hero">
-      <h1>Inicialización del Proyecto</h1>
-      <p class="hero-subtitle">La arquitectura Cliente/Servidor se ha desplegado con éxito bajo estándares modernos de diseño y seguridad web.</p>
-    </section>
-
-    <!-- DevSecOps Status & Architecture Map -->
-    <div class="dashboard-grid">
-      
-      <!-- Panel 1: API Status Monitor (Dynamic) -->
-      <section class="card monitor-card" id="api-monitor">
-        <div class="card-header">
-          <div class="card-title">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
-            <h2>Estado del Servidor (Backend)</h2>
-          </div>
-          <span class="status-indicator status-unknown" id="connection-status">Desconectado</span>
-        </div>
-        
-        <div class="card-body">
-          <div class="status-box">
-            <div class="status-field">
-              <span class="field-label">Endpoint:</span>
-              <span class="field-value code-text">/api/health</span>
-            </div>
-            <div class="status-field">
-              <span class="field-label">Código de Respuesta:</span>
-              <span class="field-value" id="status-code">-</span>
-            </div>
-            <div class="status-field">
-              <span class="field-label">Entorno:</span>
-              <span class="field-value" id="app-environment">-</span>
-            </div>
-            <div class="status-field">
-              <span class="field-label">Última Respuesta:</span>
-              <span class="field-value" id="response-timestamp">-</span>
-            </div>
-          </div>
-          <button class="btn btn-primary" id="btn-recheck">
-            Probar Conexión
-          </button>
-        </div>
-      </section>
-
-      <!-- Panel 2: Secure Best Practices Checklist -->
-      <section class="card security-checklist-card">
-        <div class="card-header">
-          <div class="card-title">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-            <h2>Seguridad por Diseño (DevSecOps)</h2>
-          </div>
-        </div>
-        <div class="card-body">
-          <ul class="security-list">
-            <li class="checked">
-              <span class="checkbox-custom">✓</span>
-              <div>
-                <strong>HTTP Headers (Helmet)</strong>
-                <p>Configuración de CSP, HSTS, X-Frame-Options y control de referencias.</p>
-              </div>
-            </li>
-            <li class="checked">
-              <span class="checkbox-custom">✓</span>
-              <div>
-                <strong>CORS Restringido</strong>
-                <p>Solo permite orígenes explícitos configurados por variables de entorno.</p>
-              </div>
-            </li>
-            <li class="checked">
-              <span class="checkbox-custom">✓</span>
-              <div>
-                <strong>Rate Limiting</strong>
-                <p>Protección integrada en la API para prevenir ataques DDoS y fuerza bruta.</p>
-              </div>
-            </li>
-            <li class="checked">
-              <span class="checkbox-custom">✓</span>
-              <div>
-                <strong>Docker Non-Root Containers</strong>
-                <p>Contenedores minimizados con Alpine, aislados y corriendo sin privilegios root.</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-    </div>
-  </main>
-
-  <!-- Premium Footer -->
-  <footer class="app-footer">
-    <div class="container footer-content">
-      <p>&copy; 2026 TutorTIC. Todos los derechos reservados. Diseñado bajo el enfoque DevSecOps.</p>
-    </div>
-  </footer>
-
-  <!-- Custom JS -->
-  <script src="js/app.js"></script>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TutorTIC – Plataforma de Mentoría TIC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
