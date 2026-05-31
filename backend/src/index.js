@@ -7,10 +7,15 @@ const { sequelize } = require('./models');
 const PORT = process.env.PORT || 3000;
 let server;
 
+const seedMentores = require('./seeds/mentores.seed.js');
+const seedVacantes = require('./seeds/vacantes.seed.js');
+
 // Sincronizar la base de datos antes de iniciar el servidor HTTP
 sequelize.sync({ alter: true })
-  .then(() => {
+  .then(async () => {
     console.log('[TutorTIC Backend] Base de datos sincronizada con éxito.');
+    await seedMentores();
+    await seedVacantes();
     server = app.listen(PORT, () => {
       console.log(`[TutorTIC Backend] Servidor escuchando de manera segura en el puerto ${PORT}`);
       console.log(`[TutorTIC Backend] Entorno actual: ${process.env.NODE_ENV || 'development'}`);

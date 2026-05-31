@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-// Definición del modelo Estudiante
+// Definición del modelo Estudiante (Perfil específico)
 const Estudiante = sequelize.define('Estudiante', {
   id: {
     type: DataTypes.INTEGER,
@@ -9,34 +9,25 @@ const Estudiante = sequelize.define('Estudiante', {
     autoIncrement: true,
     allowNull: false
   },
-  nombre: {
-    type: DataTypes.STRING,
+  usuarioId: {
+    type: DataTypes.INTEGER,
     allowNull: false,
-    validate: {
-      notEmpty: {
-        msg: 'El nombre del estudiante no puede estar vacío.'
-      }
-    }
+    unique: true
   },
-  correo: {
+  bio: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
+  intereses: {
     type: DataTypes.STRING,
-    allowNull: false,
-    unique: {
-      msg: 'El correo electrónico ya está registrado.'
-    },
-    validate: {
-      isEmail: {
-        msg: 'El formato del correo electrónico es inválido.'
-      },
-      notEmpty: {
-        msg: 'El correo electrónico no puede estar vacío.'
-      }
-    }
+    allowNull: true
+  },
+  telefono: {
+    type: DataTypes.STRING,
+    allowNull: true
   }
 }, {
-  // Configuración del modelo
   tableName: 'estudiantes',
-  // Habilita los campos automáticos createdAt y updatedAt (auditoría básica DevSecOps)
   timestamps: true
 });
 

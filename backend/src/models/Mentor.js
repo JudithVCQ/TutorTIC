@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-// Definición del modelo Mentor
+// Definición del modelo Mentor (Perfil específico)
 const Mentor = sequelize.define('Mentor', {
   id: {
     type: DataTypes.INTEGER,
@@ -9,39 +9,25 @@ const Mentor = sequelize.define('Mentor', {
     autoIncrement: true,
     allowNull: false
   },
-  nombre: {
-    type: DataTypes.STRING,
+  usuarioId: {
+    type: DataTypes.INTEGER,
     allowNull: false,
-    validate: {
-      notEmpty: {
-        msg: 'El nombre del mentor no puede estar vacío.'
-      }
-    }
+    unique: true
   },
-  correo: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: {
-      msg: 'El correo electrónico ya está registrado.'
-    },
-    validate: {
-      isEmail: {
-        msg: 'El formato del correo electrónico es inválido.'
-      },
-      notEmpty: {
-        msg: 'El correo electrónico no puede estar vacío.'
-      }
-    }
+  bio: {
+    type: DataTypes.TEXT,
+    allowNull: true
   },
   especialidad: {
     type: DataTypes.STRING,
-    allowNull: true,
-    defaultValue: 'General'
+    allowNull: true
+  },
+  telefono: {
+    type: DataTypes.STRING,
+    allowNull: true
   }
 }, {
-  // Configuración del modelo
   tableName: 'mentores',
-  // Auditoría automática (createdAt, updatedAt)
   timestamps: true
 });
 
