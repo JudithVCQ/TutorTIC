@@ -29,6 +29,7 @@ services:
       - DB_NAME=tutortic_db
       - DB_USER=tutortic_user
       - DB_PASS=tutortic_password
+      - JWT_SECRET=tutortic_secreto_2026
     depends_on:
       - db
     restart: always
